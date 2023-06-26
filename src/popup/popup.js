@@ -335,11 +335,13 @@ function setContent(stage) {
         break;
       }
       contentDiv.innerHTML = `
-        <h1 class="display-5 display-top">Site info</h1>
         <div class="box-summary">
+          This report is from <a href="https://informationsecurity.ethz.ch/">Institute of Information Security at ETH Zurich</a>. It analyzes your website to see if it follows privacy laws related to cookies under the GDPR (General Data Protection Regulation). It focuses on four types of problems: (1) The use of non-essential cookies, even though not specifically allowed; (2) the use of cookies which were not listed in the consent notice; (3) cookies declared with the wrong label in the consent notice; and (4) cookies declared with the wrong expiration times. The following sections provide more information for each category. Please note that the specific cookies listed may vary slightly in each report, as they depend on the visited subsites.
+        </p>
+        <h1 class="display-5 display-top">Site info</h1>
           <div class="d-flex justify-content-between">
-            <div><b>URL</b></div>
-            <div id="summary-url"><i>Unknown</i></div>
+            <div><b>URL</b> </div>
+            <div id="summary-url"> <i>Unknown</i></div> 
           </div>
           <div class="d-flex justify-content-between">
             <div><b>Audit Type</b></div>
@@ -366,36 +368,40 @@ function setContent(stage) {
         </div>
         
         <h1 class="display-5">Non-essential cookies</h1>
-        <div class="container text-left">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-nonnecessary"></div>
-        </div>
         <div class="box" id="nonnecessaryBox">
-          <p><i class="fa-solid fa-circle-info"></i> These cookies were set even though the user hasn't yet chosen to allow all cookies.</p>
+          <p><i class="fa-solid fa-circle-info"></i> <a href="https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04" >Recital 32</a> of the GDPR specifies that consent must be given explicitly. Therefore, it is not allowed to record positive consent if the user has not explicitly provided it. Cookies that are not declared as strictly necessary but are collected even when not all cookie purposes were allowed are flagged.</p>
+        </div>
+        <div class="container text-left"> 
+            <p class='summary-p'>The flagged cookies, along with their names, URLs, and types, are as follows:</p>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-nonnecessary"></div>
         </div>
         
         <div id="section-advanced">
           <h1 class="display-5">Undeclared cookies</h1>
+          <div class="box" id="undeclaredBox">
+            <p><i class="fa-solid fa-circle-info"></i> <a href="https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04" > Article 7 and Recital 32</a> of the GDPR state that consent must be specific and informed. Cookies are flagged as undeclared if they are observed being set inside the browser but are not listed in a website's consent notice.</p>
+          </div>
           <div class="container">
+              <p class='summary-p'>The flagged cookies, along with their names, URLs, and types, are as follows:</p>
               <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-undeclared"></div>
           </div>
-          <div class="box" id="undeclaredBox">
-            <p><i class="fa-solid fa-circle-info"></i> These cookies weren't declared in the consent notice.</p>
-          </div>
-        
+
           <h1 class="display-5">Wrongly categorized</h1>
-          <div class="container">
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-wrongcat"></div>
-          </div>
           <div class="box" id="wrongcatBox">
-            <p><i class="fa-solid fa-circle-info"></i> We classified these cookies differently than what they were declared as in the consent notice.</p>
+            <p><i class="fa-solid fa-circle-info"></i> <a href="https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04" >Article 7 and Recital 32</a> of the GDPR states that consent must be specific and informed. This requirement extends to cookies, including third-party cookies, which need to be accurately declared. Additionally, cookies related to 'Google Analytics' cannot be classified as strictly necessary for the operation of the site. We flag cookies as wrongly categorized if their classification differs from what is declared in the consent notice.</p>
+          </div>
+          <div class="container">
+              <p class='summary-p'>The flagged cookies, along with their names, URLs, and types, are as follows:</p>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-wrongcat"></div>
           </div>
   
           <h1 class="display-5">Wrong expiration time</h1>
-          <div class="container">
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-wrongexpiry"></div>
-          </div>
           <div class="box" id="wrongexpiryBox">
-              <p><i class="fa-solid fa-circle-info"></i> The expiration time of these cookies is at least 1.5 times higher than declared in the consent notice.</p>
+            <p><i class="fa-solid fa-circle-info"></i> <a href="https://eur-lex.europa.eu/eli/reg/2016/679/2016-05-04" >Article 13</a>  of the GDPR and the <a href="https://ec.europa.eu/newsroom/article29/items/623051" >Article 29</a> Working Party (29WP), an EU body that advises on the interpretation of the EU cookie directive, define the necessary information that needs to be declared regarding cookies. This information includes the storage period of the cookie. We flag cookies in two cases: (1) when the actual expiry of a cookie is more than 1.5 times the declared period, and (2) when cookies are declared as session cookies but are actually persistent, or vice versa.</p>
+          </div>
+            <div class="container">
+              <p class='summary-p'>The flagged cookies, along with their names, URLs, and types, are as follows:</p>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4" id="summary-wrongexpiry"></div>
           </div>
         </div>
  
@@ -406,6 +412,18 @@ function setContent(stage) {
           <p class="summary-p" id="fixesBox">We suggest following fixes for the scanned website:</p>
           <ul class="ul-tips" id="summary-fixes"></ul>   
         </div>
+        <div class="section-tips section-fixes">
+        <div class="header-tips">
+          <i class="fa-solid fa-circle-info"></i> Legal Notice
+        </div>
+          <p class="summary-p" id="fixesBox">
+            We are sharing our preliminary findings with you as a courtesy, and as a 
+            research team at a university, we will not reveal these individual findings to anyone. We are a research 
+            institute and cannot offer any advice on the legality of your actions.
+          </p>
+          <ul class="ul-tips" id="summary-fixes"></ul>   
+        </div>
+
         `;
 
       // If we export a summary (opening it in a new window) the summary will be re-rendered. We don't want to include the buttons
